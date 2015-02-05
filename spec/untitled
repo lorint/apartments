@@ -1,0 +1,16 @@
+require_relative "../apartment"
+
+describe Apartment, "#rent"
+	it "only rents available apartments" do
+		a1 = Apartment.new(101)
+		a2 = Apartment.new(102)
+		p1 = Person.new("Mickey", "Mouse", 100)
+		# This empty apartment can be rented to someone
+		expect(a1.rent(p1)).to eq(true)
+		p2 = Person.new("Minnie", "Mouse", 22)
+		# This one has already been rented by Mickey, so Minnie can't rent it
+		expect(a1.rent(p2)).to eq(false)
+		# But she can rent the one next door :)
+		expect(a2.rent(p2)).to eq(true)
+	end
+end
